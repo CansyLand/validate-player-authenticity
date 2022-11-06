@@ -25,7 +25,7 @@ export async function runChecks(
   })
 
   // check that the request comes from a decentraland domain
-  const validOrigin = (TESTS_ENABLED && metadata.realm.catalystName === 'localhost')
+  const validOrigin = (TESTS_ENABLED && metadata.realm.catalystName === 'localhost' || 'LocalPreview')
     ? true
     : checkOrigin(req)
   if (!validOrigin) {
@@ -40,7 +40,7 @@ export async function runChecks(
 
   // Validate that the authchain signature is real
   // validate that the player is in the catalyst & location from the signature
-  const validCatalystPos: boolean = (TESTS_ENABLED && metadata.realm.catalystName === 'localhost')
+  const validCatalystPos: boolean = (TESTS_ENABLED && metadata.realm.catalystName === 'localhost' || 'LocalPreview')
     ? true
     : await checkPlayer(
       userAddress,
